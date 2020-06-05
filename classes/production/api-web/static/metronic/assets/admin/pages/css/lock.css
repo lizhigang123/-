@@ -1,0 +1,136 @@
+/***
+Lock Page
+***/
+body {
+  background-color: #ddd;
+  padding: 0;
+  margin: 0;
+}
+
+.page-lock {
+   background: #fff;
+  width: 540px;
+  margin: 0 auto;
+  margin-bottom: 0px;
+  padding:30px;
+  height:343px;
+-webkit-border-radius: 5px !important;-moz-border-radius: 5px !important;border-radius: 5px !important;
+-webkit-box-shadow: 0 0 15px rgba(0,0,0,0.25);-moz-box-shadow: 0 0 15px rgba(0,0,0,0.25);box-shadow: 0 0 15px rgba(0,0,0,0.25);
+position:absolute; top:50%; left:50%; margin-left:-270px; margin-top:-193px;font-family:"微软雅黑"
+}
+
+.page-lock .page-logo {
+  margin-bottom: 15px;
+}
+
+.page-lock .page-body {
+  width: 500px;
+  padding: 0px;
+}
+
+.page-lock .page-body:after,
+.page-lock .page-body:before {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.page-lock .page-body:after {
+  clear: both;
+}
+
+.page-lock .page-footer-custom {
+  
+   bottom: -50px;
+    color: #eee;
+    font-size: 14px;
+    left: 0;
+    margin: 0 auto;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.page-lock .page-footer-custom a {color:#fff;}
+.page-lock .page-footer-custom a:hover {text-decoration:none;}
+
+.page-lock img.page-lock-img {
+  float: left;
+  width: 200px;
+  height: auto;
+}
+
+.page-lock .page-lock-info {
+  padding-left: 10px;
+  float: right;
+  width: 280px;
+}
+
+.page-lock .page-lock-info h1 {
+  margin-top: -5px;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 32px;
+  margin-bottom: 5px;
+}
+
+.page-lock .page-lock-info .email {
+  display: block;
+  font-size: 14px;
+  line-height: 14px;
+  margin-bottom: 10px;
+}
+
+.page-lock .page-lock-info .locked {
+  color: #333;
+  font-size: 14px;
+  line-height: 14px;
+  font-style: normal;
+}
+
+.page-lock .page-lock-info form {
+  margin: 28px 0;
+}
+
+.page-lock .page-lock-info input {
+  background: #fff;
+}
+
+.page-lock .relogin {
+  margin-top: 10px;
+}
+
+/*Responsive*/
+@media (max-width: 768px) {
+  .page-lock {
+    top: 0px;
+    width: 350px;
+    margin-top: 20px;
+    margin-left: -175px;
+    height:auto;
+  }
+
+  .page-lock .page-body {
+    padding: 10px;
+    text-align: center;
+    width: 280px;
+  }
+
+  .page-lock img.page-lock-img {
+    float: none !important;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .page-lock .page-lock-info {
+    float: none !important;
+    width: 260px;
+    margin: 0 auto;
+  }
+
+  .page-lock .page-lock-info input {
+    width: 200px !important;
+  }
+}

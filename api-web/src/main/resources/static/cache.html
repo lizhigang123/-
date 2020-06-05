@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cache Manage</title>
+<link rel="stylesheet" type="text/css" href="/js/plugin/easyui1.4.5/themes/bootstrap/easyui.css" />
+<style type="text/css"></style>
+</head>
+<body style="font-size: 18px;">
+	<div style="border: dotted;">
+		<form action="" id="cache_manage_form">
+			<h3>缓存管理</h3>
+			<p>
+				<label>缓存类型</label> <select name="cache">
+					<option value="ehcache">ehcache</option>
+					<option value="redis">redis</option>
+				</select>
+			</p>
+			<p>
+				<label>缓存名</label> <select id="cache_name" name="name"></select><i style="color: red;">为空时则清空指定类型的所有缓存名的缓存</i>
+			</p>
+			<p>
+				<label>key值</label> <input name="key" /><i style="color: red;">当为空时则清空指定缓存名所有缓存</i>
+			</p>
+			<p>
+				<input id="clear_button" type="button" value="清除" style="background-color: rgba(34, 185, 226, 0.24); width: 100px; height: 30px;" />
+			</p>
+		</form>
+	</div>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="/js/plugin/easyui1.4.5/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/js/plugin/easyui1.4.5/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		var $form = $("#cache_manage_form");
+
+		$form.find("select[name='cache']").change(function(){
+			$.post("/cacheManage/listCache",{"cache":this.value},function(response){
+				if(response&&response.code=="000000"){
+					var html = "<option value=''>请选择</option>";
+					$.each(response.data,function(i,val){
+						html += "<option value='"+val+"'>"+val+"</option>"
+					});
+					$("#cache_name").html(html)
+				}
+			})
+		}).change();
+		
+		$("#clear_button").click(function(){
+			var handleRequest = function(){
+	            $.post("/cacheManage/clear",$form.serialize(),function(response){
+	            	handleResponseVo(response);
+	             });
+			}
+			var handleResponseVo = function(response){
+				if(response){
+					$.messager.alert('处理结果',response.message,response.code=='000000'?'info':'error');
+				}
+			}
+			
+			var cache = $form.find("select[name='cache']").val();
+			var name = $("#cache_name").val();
+			var key = $form.find("input[name='key']").val();
+			if(!name){
+		      $.messager.confirm('确认', '确认清空'+cache+"的所有缓存?", function(sure){
+	                if (sure){
+	                	handleRequest();
+	                }
+	            });
+	            return;
+			}
+			if(!key){
+			      $.messager.confirm('确认', '确认清空'+cache+"缓存块的所有缓存?", function(sure){
+		                if (sure){
+		                	handleRequest();
+		                }
+		            });
+			      return;
+			}
+			handleRequest();
+		});
+	});
+	</script>
+</body>
+</html>

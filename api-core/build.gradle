@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://192.168.1.6:8991/nexus/content/repositories/thirdparty/") {
+            authentication(userName: "admin", password: "admin123")
+            pom.groupId = "com.bojin.api"
+            pom.artifactId = "core"
+        }
+    }
+}
+
+dependencies {
+   compile project(':api-common')
+   
+   	//postgresql
+	//compile "org.postgresql:postgresql:9.4.1208.jre7"
+
+    //mysql
+    compile 'mysql:mysql-connector-java:5.1.45'
+  }
